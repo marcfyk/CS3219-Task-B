@@ -20,7 +20,7 @@ const run = async () => {
                 message: 'API is online :)',
             })
         } else {
-            res.status(200).json({
+            res.status(500).json({
                 message: 'API is offline :(',
             })
         }
