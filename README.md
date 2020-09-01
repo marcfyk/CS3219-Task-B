@@ -79,7 +79,7 @@ Expected Response:
 }
 ```
 
-#### **POST** `http://localhost:3000/module
+#### **POST** `http://localhost:3000/module`
 
 ##### Body keys
 - module_code
@@ -93,7 +93,7 @@ If not, the document is successfully added, with a `201` status code.
 
 ##### Examples
 
-- **POST** http://localhost:3000/module
+- **POST** `http://localhost:3000/module`
 ```javascript
 {
     "module_code": "CS3219",
@@ -118,7 +118,7 @@ Expected Response:
 }
 ```
 
-#### **PUT** http://localhost:3000/module
+#### **PUT** `http://localhost:3000/module`
 
 ##### Body keys
 - module_code
@@ -132,7 +132,7 @@ If not, the document is successfully updated, with status code `200` sent.
 
 ##### Examples
 
-- **PUT** http://localhost:3000/module
+- **PUT** `http://localhost:3000/module`
 ```javascript
 {
     "module_code": "CS3219",
@@ -156,7 +156,7 @@ Expected Response:
 }
 ```
 
-#### **DELETE** http://localhost:3000/module
+#### **DELETE** `http://localhost:3000/module`
 
 ##### Body keys
 - module_code
@@ -169,7 +169,7 @@ If not, the document is successfully deleted, with a `200` status code sent.
 
 ##### Examples
 
-- **DELETE** http://localhost:3000/module
+- **DELETE** `http://localhost:3000/module`
 ```javascript
 {
     "module_code": "CS3219"
