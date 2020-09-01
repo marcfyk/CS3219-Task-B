@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
         const { module_code, module_name } = req.body
         const document = await collection.findOne({ module_code })
         if (document !== null) {
-            res.status(200).json({ message: MESSAGE_MODULE_ALREADY_EXISTS(module_code) })
+            res.status(400).json({ message: MESSAGE_MODULE_ALREADY_EXISTS(module_code) })
         } else {
             await collection.insertOne({ module_code, module_name })
             res.status(201).json({message: MESSAGE_MODULE_ADDED(module_code)})
@@ -52,7 +52,7 @@ router.put('/', async (req, res) => {
     const db = req.app.locals.db
     const collection = db.collection('modules')
     const body_keys = ['module_code', 'module_name']
-    if (object_contains_other_keys(req.body, body_keys)) {
+    if (is_empty_obj(req.body) || object_contains_other_keys(req.body, body_keys) || !object_contains_keys(req.body, body_keys)) {
         res.sendStatus(400)
     } else {
         const { module_code, module_name } = req.body
@@ -70,7 +70,7 @@ router.delete('/', async (req, res) => {
     const db = req.app.locals.db
     const collection = db.collection('modules')
     const body_keys = ['module_code']
-    if (object_contains_other_keys(req.body, body_keys)) {
+    if (is_empty_obj(req.body) || object_contains_other_keys(req.body, body_keys) || !object_contains_keys(req.body, body_keys)) {
         res.sendStatus(400)
     } else {
         const { module_code } = req.body
