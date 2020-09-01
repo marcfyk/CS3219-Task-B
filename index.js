@@ -1,8 +1,9 @@
 import express from 'express'
 import cors from 'cors'
-import mongodb from 'mongodb'
-import { uri } from './config/mongodb-config.js'
 import { PORT, IP } from './config/config.js'
+import { get_db } from './mongodb/mongodb.js'
+
+import { module_router } from './routes/module.js'
 
 const run = async () => {
     const app = express()
@@ -12,10 +13,11 @@ const run = async () => {
 
     app.use(express.json())
 
-    const connection = await (new mongodb.MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })).connect()
+    const db = await get_db()
+    app.locals.db = db
 
     app.get('/', (req, res) => {
-        if (connection) {
+        if (app.locals.db) {
             res.status(200).json({
                 message: 'API is online :)',
             })
@@ -25,6 +27,9 @@ const run = async () => {
             })
         }
     })
+
+    app.use('/module', module_router)
+
 }
 
 run()
